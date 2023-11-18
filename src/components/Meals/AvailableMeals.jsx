@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import classes from "./AvailableMeals.module.css";
 
 import MealItem from "./Mealitem/MealItem";
@@ -6,18 +6,18 @@ import Card from "../UI/Card/Card";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState(null);
 
-  const fetchMealsHandler = useCallback(async () => {
-    setIsLoading(true);
-    // setIsError(null);
-    try {
+  useEffect(() => {
+    const fetchMealsHandler = async () => {
       const response = await fetch(
         "https://http-requests-807b4-default-rtdb.asia-southeast1.firebasedatabase.app/Meals.json"
       );
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
+      console.log(response);
 
       const data = await response.json();
       const mealsResponse = [];
@@ -30,20 +30,25 @@ const AvailableMeals = () => {
           price: data[key].price,
         });
       }
-      console.log(mealsResponse);
+      // console.log(mealsResponse);
       setMeals(mealsResponse);
-    } catch (error) {
-      console.log(error.message);
-    }
-    setIsLoading(false);
+      setIsLoading(false);
+    };
+
+    fetchMealsHandler().catch((e) => {
+      setIsLoading(false);
+      setHttpError(e.message);
+    });
   }, []);
 
-  useEffect(() => {
-    fetchMealsHandler();
-  }, [fetchMealsHandler]);
-
   console.log(meals);
-  const loader = <p className={classes.loading}>Loading...</p>;
+  const loader = (
+    <div className={classes.loader}>
+      <svg className={classes.loaderSVG} viewBox="25 25 50 50">
+        <circle r="20" cy="50" cx="50"></circle>
+      </svg>
+    </div>
+  );
   const mealsList = meals.map((meal) => (
     <MealItem
       key={meal.id}
@@ -53,6 +58,16 @@ const AvailableMeals = () => {
       price={meal.price}
     />
   ));
+  if (httpError) {
+    return (
+      <section className={classes.meals}>
+        <Card>
+          <p className={classes.errorMessage}>Unable to fetch Data</p>
+        </Card>
+      </section>
+    );
+  }
+
   return (
     <section className={classes.meals}>
       <Card>{isLoading ? loader : mealsList}</Card>
