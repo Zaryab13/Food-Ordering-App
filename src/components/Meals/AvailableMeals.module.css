@@ -10,9 +10,6 @@
     margin: 0;
     padding: 0;
   }
-  .loader{
-   text-align: center;
-  }
   .errorMessage{
     text-align: center;
     color: red;
