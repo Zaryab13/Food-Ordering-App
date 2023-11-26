@@ -8,11 +8,12 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   return (
-    <div className="fixed top-[20vh] left-[5%] w-[90%] bg-white p-4 rounded-2xl shadow-md z-30 animate-[slide-down_0.3s_ease-out_forward] md:w-[50rem]">
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] bg-white p-4 rounded-2xl shadow-md z-30 animate-[slide-down_0.3s_ease-out_forward] lg:w-[50rem] lg:left-[50%] lg:-translate-x-1/2 overflow-y-scroll max-h-[60vh]">
       <div>{props.children}</div>
     </div>
   );
 };
+
 const portalElement = document.getElementById('overlays');
 
 const Modal = (props) => {

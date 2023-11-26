@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const CheckoutForm = () => {
   return (
-    <form className="max-w-sm">
-        <div className='mb-4'>
+    <form className="w-full overflow-y-auto">
+      <div className="max-w-sm">
+        <div className="mb-4">
           <h4 className="text-lg py-4">Contact Information</h4>
           <div className="flex flex-col justify-center">
             <label htmlFor="name" className="cursor-pointer w-fit">
@@ -17,7 +18,7 @@ const CheckoutForm = () => {
             />
           </div>
         </div>
-        <div className='mb-4'>
+        <div className="mb-4">
           <div className="flex flex-col justify-center">
             <label htmlFor="name" className="cursor-pointer w-fit">
               Name
@@ -29,7 +30,7 @@ const CheckoutForm = () => {
             />
           </div>
         </div>
-        <div className='mb-4'>
+        <div className="mb-4">
           <div className="flex flex-col justify-center">
             <label htmlFor="name" className="cursor-pointer w-fit">
               Shipping Address
@@ -41,7 +42,7 @@ const CheckoutForm = () => {
             />
           </div>
         </div>
-        <div className='mb-4'>
+        <div className="mb-4">
           <div className="flex flex-col justify-center">
             <label htmlFor="name" className="cursor-pointer w-fit">
               Contact No
@@ -53,8 +54,9 @@ const CheckoutForm = () => {
             />
           </div>
         </div>
-      </form>
-  )
-}
+      </div>
+    </form>
+  );
+};
 
-export default CheckoutForm
+export default CheckoutForm;
