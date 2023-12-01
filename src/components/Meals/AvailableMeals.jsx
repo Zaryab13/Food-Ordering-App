@@ -17,7 +17,7 @@ const AvailableMeals = () => {
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
-      console.log(response);
+      // console.log(response);
 
       const data = await response.json();
       const mealsResponse = [];
@@ -41,7 +41,7 @@ const AvailableMeals = () => {
     });
   }, []);
 
-  console.log(meals);
+  // console.log(meals);
   const loader = (
     <div className="flex justify-center">
       <svg className={classes.loaderSVG} viewBox="25 25 50 50">
